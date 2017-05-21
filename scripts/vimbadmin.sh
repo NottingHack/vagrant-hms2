@@ -14,7 +14,7 @@ mysql -uroot -proot -e "FLUSH PRIVILEGES"
 
 git clone https://github.com/opensolutions/ViMbAdmin.git /srv/vimbadmin
 cd /srv/vimbadmin
-composer install --no-progress --no-suggest
+/usr/local/bin/composer install --no-progress --no-suggest
 
 cp /srv/vimbadmin/public/.htaccess.dist /srv/vimbadmin/public/.htaccess
 cp /srv/vimbadmin/application/configs/application.ini.dist /srv/vimbadmin/application/configs/application.ini
@@ -57,7 +57,7 @@ mkdir -p /srv/vimbadmin-api
 
 git clone https://github.com/dpslwk/vimbadmin-api.git /srv/vimbadmin-api
 cd /srv/vimbadmin-api
-composer install --no-progress --no-suggest
+/usr/local/bin/composer install --no-progress --no-suggest
 
 cat <<\EOF > /srv/vimbadmin-api/.env
 APP_ENV=local

@@ -8,14 +8,7 @@ echo " "
 
 debconf-set-selections <<< 'libssl1.0.0:amd64 libssl1.0.0/restart-services string ntp'
 
-apt-get install -y haveged \
-php7.1-cli php7.1-dev \
-php7.1-fpm php7.1-mysql \
-php7.1-apcu php7.1-json \
-php7.1-curl php-mbstring \
-php7.1-xml php7.1-zip \
-php7.1-xdebug php7.1-mcrypt\
-php7.1-gd php7.1-memcached > /dev/null 2>&1
+apt-get install -y haveged php7.1-cli php7.1-dev php7.1-fpm php7.1-mysql php7.1-apcu php7.1-json php7.1-curl php-mbstring php7.1-xml php7.1-zip php7.1-xdebug php7.1-mcrypt php7.1-gd php7.1-memcached > /dev/null 2>&1
 
 sudo sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/7.1/cli/php.ini
 sudo sed -i "s/display_errors = .*/display_errors = On/" /etc/php/7.1/cli/php.ini
@@ -51,9 +44,7 @@ cp phpmyadmin/config.sample.inc.php phpmyadmin/config.inc.php
 
 # Install Composer
 
-curl -sS https://getcomposer.org/installer | php
-mv composer.phar /usr/local/bin/composer
-
-# Add Composer Global Bin To Path
-
-printf "\nPATH=\"$(sudo su - vagrant -c 'composer config -g home 2>/dev/null')/vendor/bin:\$PATH\"\n" | tee -a /home/vagrant/.profile
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('SHA384', 'composer-setup.php') === trim(file_get_contents('https://composer.github.io/installer.sig'))) { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+php -r "unlink('composer-setup.php');"
