@@ -18,4 +18,4 @@ mysql -uroot -proot -e "GRANT ALL ON *.* TO 'hms'@'localhost' IDENTIFIED BY 'sec
 mysql -uroot -proot -e "GRANT ALL ON hms_test.* TO 'travis'@'localhost' WITH GRANT OPTION"
 mysql -uroot -proot -e "FLUSH PRIVILEGES"
 mysql -uroot -proot -e "CREATE DATABASE hms"
-mysql -uroot -proot -e "CREATE DATABASE hms_test" 
+mysql -uroot -proot -e "CREATE DATABASE hms_test"

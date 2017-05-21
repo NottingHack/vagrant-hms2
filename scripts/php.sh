@@ -8,14 +8,13 @@ echo " "
 
 debconf-set-selections <<< 'libssl1.0.0:amd64 libssl1.0.0/restart-services string ntp'
 
-# removing php-pear php-dev as they rely on PHP5
 apt-get install -y haveged \
 php7.1-cli php7.1-dev \
 php7.1-fpm php7.1-mysql \
 php7.1-apcu php7.1-json \
 php7.1-curl php-mbstring \
 php7.1-xml php7.1-zip \
-php7.1-xdebug \
+php7.1-xdebug php7.1-mcrypt\
 php7.1-gd php7.1-memcached > /dev/null 2>&1
 
 sudo sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/7.1/cli/php.ini
