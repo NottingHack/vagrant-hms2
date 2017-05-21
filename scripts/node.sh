@@ -17,5 +17,4 @@ apt-get install -y nodejs yarn > /dev/null 2>&1
 
 /usr/bin/npm install -g gulp
 /usr/bin/npm install -g bower
-/usr/bin/npm install -g yarn
 /usr/bin/npm install -g grunt-cli

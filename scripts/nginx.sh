@@ -12,6 +12,7 @@ openssl genrsa -out /etc/nginx/ssl/hmsdev.key 2048 > /dev/null 2>&1
 openssl req -new -x509 -key /etc/nginx/ssl/hmsdev.key -out /etc/nginx/ssl/hmsdev.cert -days 3650 -subj /CN=hmsdev > /dev/null 2>&1
 
 rm /etc/nginx/sites-available/default
+rm /etc/nginx/sites-enabled/default
 
 cat <<\EOF > /etc/nginx/sites-available/default
 server {

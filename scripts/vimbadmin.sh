@@ -142,7 +142,7 @@ server {
 }
 EOF
 
-ln -s ../sites-available/vimbadmin-api /etc/nginx/sites-enabled/vimbadmin-api
+ln -s /etc/nginx/sites-available/vimbadmin-api /etc/nginx/sites-enabled/vimbadmin-api
 
 chown vagrant:vagrant -R /srv/vimbadmin
 chown vagrant:vagrant -R /srv/vimbadmin-api
