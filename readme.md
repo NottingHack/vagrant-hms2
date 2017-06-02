@@ -11,7 +11,7 @@ Installed software
 - Git
 - PHP 7.1 (deb.sury.org)
 - Nginx (dotDeb.org)
-- MariaDB (dotDeb.org)
+- MariaDBm (MariaDB Foundation)
 - Kerberos
 - Composer
 - Node (With Yarn, Bower, Grunt, and Gulp)

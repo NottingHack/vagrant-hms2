@@ -25,7 +25,7 @@ sed -i "s|resources.doctrine2.connection.options.password = 'xxx'|resources.doct
 sed -i 's/ = 2000/ = 5000/' /srv/vimbadmin/application/configs/application.ini
 sed -i 's|/srv/vmail/|/var/vmail/|' /srv/vimbadmin/application/configs/application.ini
 sed -i 's/ViMbAdmin Administrator/hmsdev Mail Admin/' /srv/vimbadmin/application/configs/application.ini
-sed -i 's/support@example.com/hsmdev@nottinghack.org.uk/' /srv/vimbadmin/application/configs/application.ini
+sed -i 's/support@example.com/hmsdev@nottinghack.org.uk/' /srv/vimbadmin/application/configs/application.ini
 sed -i 's/smtp.example.com/hmsdev/' /srv/vimbadmin/application/configs/application.ini
 sed -i 's/server.pop3.enabled = 1/server.pop3.enabled = 0/' /srv/vimbadmin/application/configs/application.ini
 sed -i 's/smtp.%d/mail.%d/'  /srv/vimbadmin/application/configs/application.ini
@@ -34,9 +34,9 @@ sed -i 's/Example Limited/Nottingham Hackspace Ltd/'  /srv/vimbadmin/application
 sed -i 's/Example Support Team/Nottinghack Support Team/'  /srv/vimbadmin/application/configs/application.ini
 sed -i 's/ViMbAdmin Autobot/ViMbAdmin Autobot for hmsdev/'  /srv/vimbadmin/application/configs/application.ini
 sed -i 's/autobot@example.com/autobot@hmsdev/'  /srv/vimbadmin/application/configs/application.ini
-sed -i 's/do-not-reply@example.com/do-not-reply@hsmdev/'  /srv/vimbadmin/application/configs/application.ini
-sed -i 's/sitename = "ViMbAdmin"/sitename = "ViMbAdmin @ hsmdev"/'  /srv/vimbadmin/application/configs/application.ini
-sed -i 's|"https://www.example.com/vimbadmin/"|"https://vba.hsmdev/"|'  /srv/vimbadmin/application/configs/application.ini
+sed -i 's/do-not-reply@example.com/do-not-reply@hmsdev/'  /srv/vimbadmin/application/configs/application.ini
+sed -i 's/sitename = "ViMbAdmin"/sitename = "ViMbAdmin @ hmsdev"/'  /srv/vimbadmin/application/configs/application.ini
+sed -i 's|"https://www.example.com/vimbadmin/"|"https://vba.hmsdev/"|'  /srv/vimbadmin/application/configs/application.ini
 sed -i 's/defaults.mailbox.password_scheme = "md5.salted"/defaults.mailbox.password_scheme = "dovecot:SSHA512"/' /srv/vimbadmin/application/configs/application.ini
 
 /srv/vimbadmin/bin/doctrine2-cli.php orm:schema-tool:create
