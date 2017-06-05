@@ -30,6 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision 'shell', path: './scripts/node.sh'
   config.vm.provision 'shell', path: './scripts/mailhog.sh'
   config.vm.provision 'shell', path: './scripts/redis_memcached.sh'
+  config.vm.provision 'shell', path: './scripts/beanstalkd.sh'
   config.vm.provision 'shell', path: './scripts/vimbadmin.sh'
   config.vm.provision 'shell', path: './scripts/mix.sh', privileged: false
   config.vm.provision :reload

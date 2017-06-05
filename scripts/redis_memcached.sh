@@ -6,4 +6,4 @@ echo " "
 echo "REDIS & MEMCACHED"
 echo " "
 
-apt-get install -y redis-server memcached
+apt-get install -y redis-server memcached  > /dev/null 2>&1
