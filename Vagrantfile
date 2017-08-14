@@ -16,7 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.network "private_network", ip: "192.168.25.35"
 
-  config.vm.synced_folder './', '/vagrant', disabled: true
+  #config.vm.synced_folder './', '/vagrant', disabled: true
 
   # Run The Base Provisioning Script
   # config.vm.provision 'shell', path: './scripts/update.sh'
