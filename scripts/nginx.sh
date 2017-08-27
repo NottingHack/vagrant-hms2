@@ -8,8 +8,8 @@ echo " "
 
 apt-get install -y nginx-full > /dev/null 2>&1
 mkdir /etc/nginx/ssl
-openssl genrsa -out /etc/nginx/ssl/hmsdev.key 2048 > /dev/null 2>&1
-openssl req -new -x509 -key /etc/nginx/ssl/hmsdev.key -out /etc/nginx/ssl/hmsdev.cert -days 3650 -subj /CN=hmsdev > /dev/null 2>&1
+cp /vagrant/config/ssl/* /etc/nginx/ssl/
+chmod a+r /etc/nginx/ssl/*
 
 rm /etc/nginx/sites-available/default
 rm /etc/nginx/sites-enabled/default
@@ -28,8 +28,8 @@ server {
     listen 443 ssl;
     listen [::]:443 ssl ipv6only=on;
 
-    ssl_certificate    /etc/nginx/ssl/hmsdev.cert;
-    ssl_certificate_key    /etc/nginx/ssl/hmsdev.key;
+    ssl_certificate    /etc/nginx/ssl/hmsdev.crt.pem;
+    ssl_certificate_key    /etc/nginx/ssl/hmsdev.key.pem;
 
     root /srv/www/public;
 
