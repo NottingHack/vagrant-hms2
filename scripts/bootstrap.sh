@@ -10,6 +10,10 @@ apt-get update > /dev/null 2>&1
 
 apt-get install -y linux-headers-$(uname -r) build-essential software-properties-common vim git curl apt-transport-https lsb-release ca-certificates > /dev/null 2>&1
 
+debconf-set-selections <<< 'locales locales/default_environment_locale select en_GB.UTF-8'
+dpkg-reconfigure --frontend=noninteractive locales
+update-locale LANGUAGE='en_GB:en'
+
 # deb.sury.org
 wget --quiet -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
