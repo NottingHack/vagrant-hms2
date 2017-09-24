@@ -11,7 +11,7 @@ echo " "
 wget --quiet -O /usr/local/bin/mailhog https://github.com/mailhog/MailHog/releases/download/v0.2.1/MailHog_linux_amd64
 chmod +x /usr/local/bin/mailhog
 
-sudo tee /etc/systemd/system/mailhog.service <<EOL
+cat <<\EOF > /etc/systemd/system/mailhog.service
 [Unit]
 Description=Mailhog
 After=network.target
@@ -22,7 +22,7 @@ ExecStart=/usr/bin/env /usr/local/bin/mailhog > /dev/null 2>&1 &
 
 [Install]
 WantedBy=multi-user.target
-EOL
+EOF
 
 systemctl daemon-reload
 systemctl enable mailhog

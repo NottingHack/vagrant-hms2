@@ -8,7 +8,7 @@ echo " "
 
 apt-get update > /dev/null 2>&1
 
-apt-get install -y linux-headers-$(uname -r) build-essential software-properties-common vim git curl apt-transport-https lsb-release ca-certificates > /dev/null 2>&1
+apt-get install -y linux-headers-$(uname -r) build-essential software-properties-common vim git curl apt-transport-https lsb-release ca-certificates dirmngr > /dev/null 2>&1
 
 debconf-set-selections <<< 'locales locales/default_environment_locale select en_GB.UTF-8'
 dpkg-reconfigure --frontend=noninteractive locales
@@ -18,16 +18,12 @@ update-locale LANGUAGE='en_GB:en'
 wget --quiet -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
 
-# dotDeb
-add-apt-repository -y "deb http://packages.dotdeb.org jessie all"
-wget --quiet https://www.dotdeb.org/dotdeb.gpg 
-apt-key add dotdeb.gpg
+wget --quiet -O /etc/apt/trusted.gpg.d/nginx.gpg https://packages.sury.org/nginx/apt.gpg
+echo "deb https://packages.sury.org/nginx/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/nginx.list
 
 # mariadb
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db  > /dev/null 2>&1
-#echo "deb [arch=amd64,i386,ppc64el] http://lon1.mirrors.digitalocean.com/mariadb/repo/10.2/debian $(lsb_release -sc) main" > /etc/apt/sources.list.d/mariadb.list
-echo "deb https://downloads.mariadb.com/MariaDB/mariadb-10.2.6/repo/debian/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/mariadb.list
-
+wget -q "http://keyserver.ubuntu.com:11371/pks/lookup?op=get&search=0xF1656F24C74CD1D8" -O- | sudo apt-key add - >/dev/null 2>&1
+echo "deb [arch=amd64,i386,ppc64el] http://mirrors.coreix.net/mariadb/repo/10.2/debian $(lsb_release -sc) main" > /etc/apt/sources.list.d/mariadb.list
 
 apt-get update > /dev/null 2>&1
 
@@ -35,7 +31,6 @@ if ! [ -L /srv/www ]; then
   rm -rf /srv/www
   ln -fs /vagrant /srv/www
 fi
-
 
 cat >> /home/vagrant/.bash_aliases <<EOF
 alias l='ls -pla'
