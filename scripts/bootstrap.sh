@@ -25,7 +25,9 @@ apt-key add dotdeb.gpg
 
 # mariadb
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db  > /dev/null 2>&1
-echo "deb [arch=amd64,i386,ppc64el] http://lon1.mirrors.digitalocean.com/mariadb/repo/10.2/debian $(lsb_release -sc) main" > /etc/apt/sources.list.d/mariadb.list
+#echo "deb [arch=amd64,i386,ppc64el] http://lon1.mirrors.digitalocean.com/mariadb/repo/10.2/debian $(lsb_release -sc) main" > /etc/apt/sources.list.d/mariadb.list
+echo "deb https://downloads.mariadb.com/MariaDB/mariadb-10.2.6/repo/debian/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/mariadb.list
+
 
 apt-get update > /dev/null 2>&1
 
