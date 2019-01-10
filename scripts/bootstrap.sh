@@ -10,9 +10,11 @@ apt-get update > /dev/null 2>&1
 
 apt-get install -y linux-headers-$(uname -r) build-essential software-properties-common vim git curl apt-transport-https lsb-release ca-certificates dirmngr > /dev/null 2>&1
 
+sed -i 's/# en_GB.UTF-8 UTF-8/en_GB.UTF-8 UTF-8/' /etc/locale.gen
+sed -i 's/en_US.UTF-8 UTF-8/# en_US.UTF-8 UTF-8/' /etc/locale.gen
+update-locale LANGUAGE='en_GB:en' > /dev/null 2>&1
 debconf-set-selections <<< 'locales locales/default_environment_locale select en_GB.UTF-8'
-dpkg-reconfigure --frontend=noninteractive locales
-update-locale LANGUAGE='en_GB:en'
+dpkg-reconfigure --frontend=noninteractive locales  > /dev/null 2>&1
 
 # deb.sury.org
 wget --quiet -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
@@ -31,6 +33,8 @@ if ! [ -L /srv/www ]; then
   rm -rf /srv/www
   ln -fs /vagrant /srv/www
 fi
+
+update-alternatives --set editor /usr/bin/vim.basic  > /dev/null 2>&1
 
 cat >> /home/vagrant/.bash_aliases <<EOF
 alias l='ls -pla'

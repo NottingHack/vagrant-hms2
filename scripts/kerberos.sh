@@ -19,7 +19,7 @@ debconf-set-selections <<< 'krb5-config krb5-config/admin_server string hmsdev.n
 
 
 # Install krb, create passord database, and set the master password to "krbMasterPassword"
-apt-get install php-pear php7.1-dev libkrb5-dev haveged krb5-{admin-server,kdc} -y > /dev/null 2>&1
+apt-get install php-pear php7.2-dev libkrb5-dev haveged krb5-{admin-server,kdc} -y > /dev/null 2>&1
 kdb5_util create -s -P krbMasterPassword
 mkdir /var/log/kerberos
 touch /var/log/kerberos/{krb5kdc,kadmin,krb5lib}.log
@@ -40,17 +40,18 @@ kadmin.local -q "ktadd -k /home/vagrant/hms.keytab hms/web"
 chmod a+r /home/vagrant/hms.keytab
 
 
-# pecl install krb5 - this (still 2016) doesn't have kadm support.
+# pecl install krb5
 mkdir /root/php-krb
 cd /root/php-krb
-wget --quiet http://pecl.php.net/get/krb5-1.1.0.tgz
-tar zxf krb5-1.1.0.tgz
-cd /root/php-krb/krb5-1.1.0
+wget --quiet http://pecl.php.net/get/krb5-1.1.2.tgz
+tar zxf krb5-1.1.2.tgz
+cd /root/php-krb/krb5-1.1.2
+patch -p1 < /vagrant/config/krb5/patch.diff
 phpize
 ./configure --with-krb5kadm=S
-make install
+make install > /dev/null 2>&1
 ldconfig
 
-echo "extension=krb5.so" >> /etc/php/7.1/mods-available/krb5.ini
-ln -s /etc/php/7.1/mods-available/krb5.ini /etc/php/7.1/fpm/conf.d/20-krb5.ini 
-ln -s /etc/php/7.1/mods-available/krb5.ini /etc/php/7.1/cli/conf.d/20-krb5.ini 
+echo "extension=krb5.so" >> /etc/php/7.2/mods-available/krb5.ini
+ln -s /etc/php/7.2/mods-available/krb5.ini /etc/php/7.2/fpm/conf.d/20-krb5.ini 
+ln -s /etc/php/7.2/mods-available/krb5.ini /etc/php/7.2/cli/conf.d/20-krb5.ini 

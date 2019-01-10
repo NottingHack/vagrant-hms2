@@ -16,14 +16,14 @@ cat <<\EOF > /home/vagrant/mixwatch.sh
 cd /vagrant/
 echo "Starting mix watch" >> /vagrant/dev/mixwatch.log;
 while [ 1 ]; do
-yarn run watch-poll >> /vagrant/dev/mixwatch.log 2>&1;
+npm run watch-poll >> /vagrant/dev/mixwatch.log 2>&1;
 echo "Restarting mix watch" >> /vagrant/dev/mixwatch.log;
 done
 EOF
 
 cat <<\EOF > /home/vagrant/restartwatch.sh
 #!/bin/bash
-pkill -9 -f yarn
+pkill -9 -f npm
 /home/vagrant/mixwatch.sh &
 EOF
 
