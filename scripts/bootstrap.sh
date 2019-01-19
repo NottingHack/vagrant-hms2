@@ -25,7 +25,11 @@ echo "deb https://packages.sury.org/nginx/ $(lsb_release -sc) main" > /etc/apt/s
 
 # mariadb
 wget -q "http://keyserver.ubuntu.com:11371/pks/lookup?op=get&search=0xF1656F24C74CD1D8" -O- | sudo apt-key add - >/dev/null 2>&1
-echo "deb [arch=amd64,i386,ppc64el] http://mirrors.coreix.net/mariadb/repo/10.2/debian $(lsb_release -sc) main" > /etc/apt/sources.list.d/mariadb.list
+echo "deb http://mirrors.coreix.net/mariadb/repo/10.2/debian $(lsb_release -sc) main" > /etc/apt/sources.list.d/mariadb.list
+
+#mosquitto
+wget -q "http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key" -O- | sudo apt-key add - >/dev/null 2>&1
+echo "deb https://repo.mosquitto.org/debian $(lsb_release -sc) main" > /etc/apt/sources.list.d/mosquitto.list
 
 apt-get update > /dev/null 2>&1
 

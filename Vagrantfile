@@ -27,6 +27,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision 'shell', path: './scripts/database.sh'
   config.vm.provision 'shell', path: './scripts/php.sh'
   config.vm.provision 'shell', path: './scripts/kerberos.sh'
+  config.vm.provision 'shell', path: './scripts/mqtt.sh'
   config.vm.provision 'shell', path: './scripts/node.sh'
   config.vm.provision 'shell', path: './scripts/mailhog.sh'
   config.vm.provision 'shell', path: './scripts/redis_memcached.sh'
