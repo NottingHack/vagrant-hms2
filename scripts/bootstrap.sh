@@ -41,7 +41,7 @@ fi
 update-alternatives --set editor /usr/bin/vim.basic  > /dev/null 2>&1
 
 cat >> /home/vagrant/.bash_aliases <<EOF
-alias l='ls -pla'
+alias l='ls -phla'
 alias cd..="cd .."
 alias cd...="cd ../.."
 alias cd....="cd ../../.."

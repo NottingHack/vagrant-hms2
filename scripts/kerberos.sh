@@ -26,8 +26,8 @@ touch /var/log/kerberos/{krb5kdc,kadmin,krb5lib}.log
 chmod -R 750  /var/log/kerberos
 echo "vagrant/admin@NOTTINGTEST.ORG.UK * " > /etc/krb5kdc/kadm5.acl
 echo "hms/web@NOTTINGTEST.ORG.UK * " >> /etc/krb5kdc/kadm5.acl
-/etc/init.d/krb5-kdc start 
-/etc/init.d/krb5-admin-server start 
+/etc/init.d/krb5-kdc start
+/etc/init.d/krb5-admin-server start
 
 # create some accounts (vagrant, vagrant/admin, admin/admin)
 kadmin.local -q "addprinc -pw admin admin"
@@ -53,5 +53,5 @@ make install > /dev/null 2>&1
 ldconfig
 
 echo "extension=krb5.so" >> /etc/php/7.2/mods-available/krb5.ini
-ln -s /etc/php/7.2/mods-available/krb5.ini /etc/php/7.2/fpm/conf.d/20-krb5.ini 
-ln -s /etc/php/7.2/mods-available/krb5.ini /etc/php/7.2/cli/conf.d/20-krb5.ini 
+ln -s /etc/php/7.2/mods-available/krb5.ini /etc/php/7.2/fpm/conf.d/20-krb5.ini
+ln -s /etc/php/7.2/mods-available/krb5.ini /etc/php/7.2/cli/conf.d/20-krb5.ini

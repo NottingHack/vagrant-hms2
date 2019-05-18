@@ -60,10 +60,15 @@ cd /srv/vimbadmin-api
 /usr/local/bin/composer install --no-progress --no-suggest > /devnull 2>&1
 
 cat <<\EOF > /srv/vimbadmin-api/.env
+APP_NAME=Vimbadmin-API
 APP_ENV=local
-APP_DEBUG=true
 APP_KEY=sbLYTUohcSWeTr13VXgu0GGjB7FIkn3u
+APP_DEBUG=true
+APP_URL=http://vimbadmin-api.hmsdev
 APP_TIMEZONE=UTC
+
+LOG_CHANNEL=stack
+LOG_SLACK_WEBHOOK_URL=
 
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -71,6 +76,9 @@ DB_PORT=3306
 DB_DATABASE=vimbadmin-api
 DB_USERNAME=vimbadmin-api
 DB_PASSWORD=password
+
+CACHE_DRIVER=file
+QUEUE_CONNECTION=sync
 
 VBA_CONNECTION=mysql
 VBA_HOST=127.0.0.1
@@ -90,7 +98,7 @@ cat <<\EOF > /etc/nginx/sites-available/vimbadmin-api
 server {
     listen 80;
     listen [::]:80;
-    
+
     root /srv/vimbadmin-api/public;
 
     index index.php;
@@ -101,7 +109,7 @@ server {
     error_log /var/log/nginx/vimbadmin-api-error.log;
 
     autoindex off;
-    
+
     # serve static files directly
     location ~* \.(jpg|jpeg|gif|css|png|js|ico|html)$ {
         access_log off;
@@ -121,7 +129,7 @@ server {
         log_not_found off;
         access_log off;
     }
-    
+
     # Deny all attempts to access hidden files such as .htaccess, .htpasswd, .DS_Store (Mac).
     # Keep logging the requests to parse later (or to pass to firewall utilities such as fail2ban)
     location ~ /\. {

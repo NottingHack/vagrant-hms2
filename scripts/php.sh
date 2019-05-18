@@ -12,7 +12,7 @@ apt-get install -y haveged php7.2-cli php7.2-dev php7.2-fpm php7.2-mysql php7.2-
 
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/7.2/cli/php.ini
 sed -i "s/display_errors = .*/display_errors = On/" /etc/php/7.2/cli/php.ini
-sed -i "s/memory_limit = .*/memory_limit = 512M/" /etc/php/7.2/cli/php.ini
+sed -i "s/memory_limit = .*/memory_limit = -1/" /etc/php/7.2/cli/php.ini
 sed -i "s/;date.timezone.*/date.timezone = Europe\/London/" /etc/php/7.2/cli/php.ini
 sed -i "s/;intl.default_locale =/intl.default_locale = en_GB.UTF-8/" /etc/php/7.2/cli/php.ini
 
@@ -32,13 +32,14 @@ sed -i "s/upload_max_filesize = .*/upload_max_filesize = 100M/" /etc/php/7.2/fpm
 sed -i "s/post_max_size = .*/post_max_size = 100M/" /etc/php/7.2/fpm/php.ini
 sed -i "s/;date.timezone.*/date.timezone = Europe\/London/" /etc/php/7.2/fpm/php.ini
 sed -i "s/;intl.default_locale =/intl.default_locale = en_GB.UTF-8/" /etc/php/7.2/fpm/php.ini
+sed -i "s/max_execution_time = 30/max_execution_time = 300/" /etc/php/7.2/fpm/php.ini
 
 phpdismod -s cli xdebug
 
 #phpmyadmin
 cd /srv/
 wget --quiet https://files.phpmyadmin.net/phpMyAdmin/4.8.4/phpMyAdmin-4.8.4-english.tar.gz
-tar zxf phpMyAdmin-4.8.4-english.tar.gz 
+tar zxf phpMyAdmin-4.8.4-english.tar.gz
 mv phpMyAdmin-4.8.4-english phpmyadmin
 chown vagrant:vagrant -R phpmyadmin
 cp phpmyadmin/config.sample.inc.php phpmyadmin/config.inc.php
