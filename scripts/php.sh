@@ -8,7 +8,7 @@ echo " "
 
 debconf-set-selections <<< 'libssl1.0.0:amd64 libssl1.0.0/restart-services string ntp'
 
-apt-get install -y haveged php7.2-cli php7.2-dev php7.2-fpm php7.2-mysql php7.2-apcu php7.2-json php7.2-curl php7.2-mbstring php7.2-xml php7.2-zip php7.2-xdebug php7.2-gd php7.2-memcached > /dev/null 2>&1
+apt-get install -y haveged php-apcu php-imagick php-memcache php-memcached php-ssh2 php7.2-cli php7.2-curl php7.2-dev php7.2-fpm php7.2-gd php7.2-gmp php7.2-intl php7.2-json php7.2-ldap php7.2-mysql php7.2-readline php7.2-snmp php7.2-mbstring php7.2-xml php7.2-zip php7.2-xdebug > /dev/null 2>&1
 
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/7.2/cli/php.ini
 sed -i "s/display_errors = .*/display_errors = On/" /etc/php/7.2/cli/php.ini
