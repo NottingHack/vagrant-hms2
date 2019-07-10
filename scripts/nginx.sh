@@ -41,12 +41,25 @@ server {
     error_log /vagrant/storage/logs/nginx-error.log;
 
     autoindex off;
-    
-    # serve static files directly
-    location ~* \.(jpg|jpeg|gif|css|png|js|ico|html)$ {
+
+    # This block will catch static file requests, such as images, css, js
+    # The ?: prefix is a 'non-capturing' mark, meaning we do not require
+    # the pattern to be captured into $1 which should help improve performance
+    location ~* \.(jpg|jpeg|gif|png|ico|cur|gz|svg|svgz|mp4|ogg|ogv|webm|htc|svg|woff|woff2|ttf)$ {
         access_log off;
         expires 10d;
-        add_header Cache-Control public;
+        add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+    }
+
+    # shorter cache for css and js
+    location ~* \.(?:css|js)$ {
+      expires 7d;
+      access_log off;
+      add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+    }
+
+    location ~ /.well-known {
+      allow all;
     }
 
     # Global restrictions configuration file.
@@ -61,7 +74,7 @@ server {
         log_not_found off;
         access_log off;
     }
-    
+
     # Deny all attempts to access hidden files such as .htaccess, .htpasswd, .DS_Store (Mac).
     # Keep logging the requests to parse later (or to pass to firewall utilities such as fail2ban)
     location ~ /\. {
@@ -83,7 +96,7 @@ server {
     location /phpmyadmin {
         root /srv/;
         index index.php;
-            
+
         location ~ ^/phpmyadmin/(.+\.php)$ {
             try_files $uri =404;
             root /srv/;
@@ -93,7 +106,7 @@ server {
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
             fastcgi_read_timeout 300;
         }
-        
+
         location ~* ^/phpmyadmin/(.+\.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt))$ {
             root /srv/;
         }
