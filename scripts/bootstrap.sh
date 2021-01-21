@@ -25,8 +25,8 @@ wget --quiet -O /etc/apt/trusted.gpg.d/nginx.gpg https://packages.sury.org/nginx
 echo "deb https://packages.sury.org/nginx/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/nginx.list
 
 # mariadb
-wget -q "http://keyserver.ubuntu.com:11371/pks/lookup?op=get&search=0xF1656F24C74CD1D8" -O- | sudo apt-key add - >/dev/null 2>&1
-echo "deb http://mirrors.coreix.net/mariadb/repo/10.2/debian $(lsb_release -sc) main" > /etc/apt/sources.list.d/mariadb.list
+sudo apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc' >/dev/null 2>&1
+echo "deb http://mirrors.coreix.net/mariadb/repo/10.5/debian $(lsb_release -sc) main" > /etc/apt/sources.list.d/mariadb.list
 
 #mosquitto
 wget -q "http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key" -O- | sudo apt-key add - >/dev/null 2>&1

@@ -12,7 +12,7 @@ debconf-set-selections <<< 'mariadb-server mysql-server/root_password_again pass
 
 apt-get install -y mariadb-server > /dev/null 2>&1
 
-sed -i 's/127.0.0.1/0.0.0.0/' /etc/mysql/my.cnf
+sed -i 's/127.0.0.1/0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
 systemctl restart mariadb
 
 # Need to setup the DB, etc here - set appropriate privledges

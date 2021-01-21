@@ -2,7 +2,7 @@ VAGRANTFILE_API_VERSION = '2'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Configure The Box
-  config.vm.box = "debian/contrib-stretch64"
+  config.vm.box = "debian/contrib-buster64"
   config.vm.hostname = "hmsdev.nottingtest.org.uk"
 
   # Don't Replace The Default Key https://github.com/mitchellh/vagrant/pull/4707
@@ -19,8 +19,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #config.vm.synced_folder './', '/vagrant', disabled: true
 
   # Run The Base Provisioning Script
-  # config.vm.provision 'shell', path: './scripts/update.sh'
-  # config.vm.provision :reload
   config.vm.provision 'shell', path: './scripts/bootstrap.sh'
   config.vm.provision :reload
   config.vm.provision 'shell', path: './scripts/nginx.sh'
@@ -31,7 +29,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision 'shell', path: './scripts/node.sh'
   config.vm.provision 'shell', path: './scripts/mailhog.sh'
   config.vm.provision 'shell', path: './scripts/redis_memcached.sh'
-  config.vm.provision 'shell', path: './scripts/beanstalkd.sh'
   config.vm.provision 'shell', path: './scripts/vimbadmin.sh'
   config.vm.provision 'shell', path: './scripts/echo.sh'
   config.vm.provision 'shell', path: './scripts/mix.sh', privileged: false

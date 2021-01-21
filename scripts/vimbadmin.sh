@@ -14,7 +14,7 @@ mysql -uroot -proot -e "FLUSH PRIVILEGES"
 
 git clone https://github.com/opensolutions/ViMbAdmin.git /srv/vimbadmin
 cd /srv/vimbadmin
-/usr/local/bin/composer install --no-progress --no-suggest > /devnull 2>&1
+/usr/local/bin/composer install --no-progress > /devnull 2>&1
 
 cp /srv/vimbadmin/public/.htaccess.dist /srv/vimbadmin/public/.htaccess
 cp /srv/vimbadmin/application/configs/application.ini.dist /srv/vimbadmin/application/configs/application.ini
@@ -57,7 +57,7 @@ mkdir -p /srv/vimbadmin-api
 
 git clone https://github.com/dpslwk/vimbadmin-api.git /srv/vimbadmin-api
 cd /srv/vimbadmin-api
-/usr/local/bin/composer install --no-progress --no-suggest > /devnull 2>&1
+php /usr/local/bin/composer install --no-progress > /devnull 2>&1
 
 cat <<\EOF > /srv/vimbadmin-api/.env
 APP_NAME=Vimbadmin-API
@@ -92,7 +92,7 @@ EOF
 
 php artisan migrate
 php artisan passport:install
-mysql -uroot -proot vimbadmin-api -e "INSERT INTO oauth_clients (id, user_id, name, secret, redirect, personal_access_client, password_client, revoked, created_at, updated_at) VALUES (3, NULL, 'HMS2.0', 'j1dbodPoVGufJA8q9MKLEWvIcCKL8crrLoImSF9w', 'http://hmsdev', 1, 0, 0, '2017-05-14 15:41:11', '2017-05-14 15:41:16')"
+mysql -uroot -proot vimbadmin-api -e "INSERT INTO oauth_clients (id, user_id, name, secret, redirect, personal_access_client, password_client, revoked, created_at, updated_at) VALUES (3, NULL, 'HMS2.0', 'j1dbodPoVGufJA8q9MKLEWvIcCKL8crrLoImSF9w', 'https://hmsdev/', 0, 0, 0, '2017-05-14 15:41:11', '2017-05-14 15:41:16')"
 
 cat <<\EOF > /etc/nginx/sites-available/vimbadmin-api
 server {
@@ -144,7 +144,7 @@ server {
     location ~ \.php$ {
         include snippets/fastcgi-php.conf;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
         fastcgi_read_timeout 300;
     }
 }
@@ -156,4 +156,4 @@ chown vagrant:vagrant -R /srv/vimbadmin
 chown vagrant:vagrant -R /srv/vimbadmin-api
 
 echo "127.0.0.1    vimbadmin-api.hmsdev" >> /etc/hosts
-service nginx restart
+systemctl restart nginx.service

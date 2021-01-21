@@ -42,6 +42,35 @@ server {
 
     autoindex off;
 
+    # Enable Gzip
+    gzip  on;
+    gzip_http_version 1.0;
+    gzip_comp_level 2;
+    gzip_min_length 1100;
+    gzip_buffers     4 8k;
+    gzip_proxied any;
+    gzip_types
+        # text/html is always compressed by HttpGzipModule
+        text/css
+        text/javascript
+        text/xml
+        text/plain
+        text/x-component
+        application/javascript
+        application/json
+        application/xml
+        application/rss+xml
+        font/truetype
+        font/opentype
+        application/vnd.ms-fontobject
+        image/svg+xml;
+
+    gzip_static on;
+
+    gzip_proxied        expired no-cache no-store private auth;
+    gzip_disable        "MSIE [1-6]\.";
+    gzip_vary           on;
+
     # This block will catch static file requests, such as images, css, js
     # The ?: prefix is a 'non-capturing' mark, meaning we do not require
     # the pattern to be captured into $1 which should help improve performance
@@ -89,7 +118,7 @@ server {
     location ~ \.php$ {
         include snippets/fastcgi-php.conf;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
         fastcgi_read_timeout 300;
     }
 
@@ -101,7 +130,7 @@ server {
             try_files $uri =404;
             root /srv/;
             include /etc/nginx/fastcgi_params;
-            fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+            fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
             fastcgi_index index.php;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
             fastcgi_read_timeout 300;
@@ -119,4 +148,4 @@ server {
 }
 EOF
 
-service nginx restart
+systemctl restart nginx.service
