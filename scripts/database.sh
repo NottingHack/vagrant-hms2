@@ -21,5 +21,6 @@ mysql -uroot -proot -e "GRANT ALL ON *.* TO 'hms'@'%' IDENTIFIED BY 'secret' WIT
 mysql -uroot -proot -e "CREATE USER 'travis'@'%'"
 mysql -uroot -proot -e "GRANT ALL ON hms_test.* TO 'travis'@'%' WITH GRANT OPTION"
 mysql -uroot -proot -e "FLUSH PRIVILEGES"
-mysql -uroot -proot -e "CREATE DATABASE hms"
-mysql -uroot -proot -e "CREATE DATABASE hms_test"
+mysql -uroot -proot -e "CREATE DATABASE hms CHARACTER SET = 'utf8mb4' COLLATE = 'utf8mb4_unicode_ci'"
+mysql -uroot -proot -e "CREATE DATABASE hms_test CHARACTER SET = 'utf8mb4' COLLATE = 'utf8mb4_unicode_ci'"
+
