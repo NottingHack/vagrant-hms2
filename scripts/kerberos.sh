@@ -19,7 +19,7 @@ debconf-set-selections <<< 'krb5-config krb5-config/admin_server string hmsdev.n
 
 
 # Install krb, create passord database, and set the master password to "krbMasterPassword"
-apt-get install php-pear php7.4-dev libkrb5-dev haveged krb5-{admin-server,kdc} -y > /dev/null 2>&1
+apt-get install php-pear libkrb5-dev haveged krb5-{admin-server,kdc} -y > /dev/null 2>&1
 kdb5_util create -s -P krbMasterPassword
 mkdir /var/log/kerberos
 touch /var/log/kerberos/{krb5kdc,kadmin,krb5lib}.log
@@ -43,10 +43,9 @@ chmod a+r /home/vagrant/hms.keytab
 # pecl install krb5
 mkdir /root/php-krb
 cd /root/php-krb
-wget --quiet http://pecl.php.net/get/krb5-1.1.2.tgz
-tar zxf krb5-1.1.2.tgz
-cd /root/php-krb/krb5-1.1.2
-patch -p1 < /vagrant/config/krb5/patch.diff
+wget --quiet http://pecl.php.net/get/krb5-1.1.4.tgz
+tar zxf krb5-1.1.4.tgz
+cd /root/php-krb/krb5-1.1.4
 phpize
 ./configure --with-krb5kadm=S
 make install > /dev/null 2>&1

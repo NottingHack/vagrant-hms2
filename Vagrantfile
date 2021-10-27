@@ -2,7 +2,7 @@ VAGRANTFILE_API_VERSION = '2'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Configure The Box
-  config.vm.box = "debian/contrib-buster64"
+  config.vm.box = "debian/bullseye64"
   config.vm.hostname = "hmsdev.nottingtest.org.uk"
 
   # Don't Replace The Default Key https://github.com/mitchellh/vagrant/pull/4707

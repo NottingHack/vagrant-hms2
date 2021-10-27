@@ -7,7 +7,7 @@ echo "MAILHOG"
 echo " "
 
 # Install & Configure MailHog
-wget --quiet -O /usr/local/bin/mailhog https://github.com/mailhog/MailHog/releases/download/v1.0.0/MailHog_linux_amd64
+wget --quiet -O /usr/local/bin/mailhog https://github.com/mailhog/MailHog/releases/download/v1.0.1/MailHog_linux_amd64
 chmod +x /usr/local/bin/mailhog
 
 cat <<\EOF > /etc/systemd/system/mailhog.service
