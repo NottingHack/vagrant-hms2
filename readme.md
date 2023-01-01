@@ -4,18 +4,17 @@ These scripts build the custom base box use in the dev of Nottinghack's HMS 2 pr
 
 Original scripts borrowed heavily form Larvel Settler laravel/settler
 
-debian/bullseye64 (virtualbox, 11.1) as base
+debian/bullseye64 (virtualbox, 11) as base
 
 Installed software
 
 - Git
-- PHP 7.4 (deb.sury.org)
-- PHP 8.0 (deb.sury.org)
+- PHP 8.2 (deb.sury.org)
 - Nginx (deb.sury.org)
-- MariaDB 10.5 (MariaDB Foundation)
+- MariaDB 10.6 (MariaDB Foundation)
 - Kerberos
 - Composer
-- Node 14
+- Node 18
 - Redis
 - Memcached
 - phpMyAdmin              (http://hmsdev/phpmyadmin/)

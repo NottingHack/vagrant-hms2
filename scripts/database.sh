@@ -23,4 +23,3 @@ mysql -uroot -proot -e "GRANT ALL ON hms_test.* TO 'travis'@'%' WITH GRANT OPTIO
 mysql -uroot -proot -e "FLUSH PRIVILEGES"
 mysql -uroot -proot -e "CREATE DATABASE hms CHARACTER SET = 'utf8mb4' COLLATE = 'utf8mb4_unicode_ci'"
 mysql -uroot -proot -e "CREATE DATABASE hms_test CHARACTER SET = 'utf8mb4' COLLATE = 'utf8mb4_unicode_ci'"
-

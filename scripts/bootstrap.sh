@@ -26,11 +26,11 @@ echo "deb https://packages.sury.org/nginx/ $(lsb_release -sc) main" > /etc/apt/s
 
 # mariadb
 sudo apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc' >/dev/null 2>&1
-echo "deb http://mirrors.coreix.net/mariadb/repo/10.5/debian $(lsb_release -sc) main" > /etc/apt/sources.list.d/mariadb.list
+echo "deb http://mirrors.coreix.net/mariadb/repo/10.6/debian $(lsb_release -sc) main" > /etc/apt/sources.list.d/mariadb.list
 
 #mosquitto
-wget -q "http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key" -O- | sudo apt-key add - >/dev/null 2>&1
-echo "deb https://repo.mosquitto.org/debian $(lsb_release -sc) main" > /etc/apt/sources.list.d/mosquitto.list
+# wget -q "http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key" -O- | sudo apt-key add - >/dev/null 2>&1
+# echo "deb https://repo.mosquitto.org/debian $(lsb_release -sc) main" > /etc/apt/sources.list.d/mosquitto.list
 
 apt-get update > /dev/null 2>&1
 
@@ -57,3 +57,18 @@ cat >> /home/vagrant/.gitignore_global << EOF
 EOF
 
 cat /home/vagrant/.bash_aliases >> /root/.bashrc
+
+# https://stackoverflow.com/questions/65149298/composer-2-0-8-issue-package-versions-deprecated
+# cat >> /usr/local/bin/unzip << EOF
+# #!/bin/sh
+
+# /usr/bin/unzip "$@"
+# sleep 0.2
+# EOF
+
+# chmod +x /usr/local/bin/unzip
+
+cat >> /etc/environment <<EOF
+COMPOSER_ALLOW_SUPERUSER=1
+COMPOSER_RUNTIME_ENV=virtualbox
+EOF

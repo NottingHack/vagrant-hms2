@@ -12,12 +12,14 @@ chmod +x /usr/local/bin/mailhog
 
 cat <<\EOF > /etc/systemd/system/mailhog.service
 [Unit]
-Description=Mailhog
-After=network.target
+Description=MailHog Email Catcher
+After=syslog.target network.target
 
 [Service]
-User=vagrant
-ExecStart=/usr/bin/env /usr/local/bin/mailhog > /dev/null 2>&1 &
+Type=simple
+ExecStart=/usr/local/bin/mailhog
+StandardOutput=journal
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target

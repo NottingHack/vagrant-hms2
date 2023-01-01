@@ -11,6 +11,9 @@ echo " "
 apt-get -y autoremove
 apt-get -y clean
 
+# Blank netplan machine-id (DUID) so machines get unique ID generated on boot.
+truncate -s 0 /etc/machine-id
+
 # Enable Swap Memory
 
 /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024

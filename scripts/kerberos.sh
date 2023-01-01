@@ -51,6 +51,6 @@ phpize
 make install > /dev/null 2>&1
 ldconfig
 
-echo "extension=krb5.so" >> /etc/php/7.4/mods-available/krb5.ini
-ln -s /etc/php/7.4/mods-available/krb5.ini /etc/php/7.4/fpm/conf.d/20-krb5.ini
-ln -s /etc/php/7.4/mods-available/krb5.ini /etc/php/7.4/cli/conf.d/20-krb5.ini
+echo "extension=krb5.so" >> /etc/php/8.2/mods-available/krb5.ini
+ln -s /etc/php/8.2/mods-available/krb5.ini /etc/php/8.2/fpm/conf.d/20-krb5.ini
+ln -s /etc/php/8.2/mods-available/krb5.ini /etc/php/8.2/cli/conf.d/20-krb5.ini
