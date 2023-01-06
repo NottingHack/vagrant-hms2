@@ -15,3 +15,8 @@ vagrant package --base `ls ~/VirtualBox\ VMs | grep vagrant-hms2` --output virtu
 ls -lh virtualbox.box
 vagrant destroy -f
 rm -rf .vagrant*
+
+# force add as a local box ready for testing
+if [ -f ./virtualbox.box ]; then
+    vagrant box add ./virtualbox.box -f --name=hms
+fi

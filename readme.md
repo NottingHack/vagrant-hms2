@@ -21,3 +21,4 @@ Installed software
 - opensolutions/ViMbAdmin (not served)
 - dpslwk/vimbadmin-api    (http://vimbadmin-api.hmsde/)
 - mailhog/MialHog         (http://hmsdev:8085)
+- soketi

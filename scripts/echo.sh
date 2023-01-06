@@ -6,22 +6,30 @@ echo " "
 echo "ECHO"
 echo " "
 
-npm install -g laravel-echo-server
+# get around uWebSockets.js install issue
+sudo -i su - root -c 'npm install --global @soketi/soketi'
 
-cat >> /etc/systemd/system/laravel-echo-server.service << EOF
+cat >> /etc/systemd/system/soketi.service << EOF
 [Unit]
-Description=Start a laravel-echo-server
+Description=Soketi WebSockets
 After=network.target
 
 [Service]
 User=vagrant
 Group=vagrant
-WorkingDirectory=/vagrant/
-ExecStart=/usr/bin/laravel-echo-server start
-Restart=on-failure
+Environment="SOKETI_DEFAULT_APP_ID=hms"
+Environment="SOKETI_DEFAULT_APP_KEY=hms-key"
+Environment="SOKETI_DEFAULT_APP_SECRET=hms-secret"
+Environment="SOKETI_SSL_CERT=/etc/nginx/ssl/hmsdev.crt.pem"
+Environment="SOKETI_SSL_KEY=/etc/nginx/ssl/hmsdev.key.pem"
+ExecStart=/usr/bin/soketi start
+KillSignal=SIGINT
+TimeoutStopSec=60
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
 systemctl daemon-reload
+systemctl enable soketi.service
